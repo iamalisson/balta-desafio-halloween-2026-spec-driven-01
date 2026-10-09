@@ -117,4 +117,4 @@ dados de traços do hanzi-writer (Arphic PL), [Yomitan](https://yomitan.wiki/). 
 O desafio **Halloween 2026** consiste em implementar implementar o modelo Spec Driven Development de ponta a ponta, criando apps completas com IA.
 
 ### Veja meu progresso no desafio
-[Incluir link para o repositório central]
+https://github.com/balta-io/balta-desafio-halloween-2026-spec-driven-01
