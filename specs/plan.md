@@ -168,6 +168,37 @@ do edge-tts não são claros, e CC-CEDICT e wordfreq são BY-SA. O README traz o
 build público (`--public`, ver Contratos), sem mp3 empacotado.
 **Por quê:** respeitar licenças sem impedir que o projeto seja usado por outras pessoas.
 
+**D-18. Deck Software (RF-09, RF-10).**
+Mesma ideia do Brave: pares oficiais en/zh alinhados por chave. Linux = catálogos gettext do KDE instalados na máquina
+(no NixOS, `/run/current-system/sw/share/locale/zh_CN`, lidos com o `gettext` da stdlib; rótulos presentes em 3 ou mais
+apps vêm primeiro). Android = `strings.xml` do Settings e do SystemUI do AOSP (en e zh-rCN, alinhados pelo nome da
+string). O iOS não tem strings abertas, então é uma lista curada (`src/curated.py`, NÃO VERIFICADO). Datas = CLDR via
+`babel` (dias da semana, períodos do dia, tempos relativos como 3分钟前) + palavras de tempo curadas. Os rótulos do
+"caminho de volta para o inglês" vêm primeiro. Ordem: plataformas em rodízio. Cerca de 305 cards.
+**Por quê:** traduções oficiais garantem que o card bate com a tela; saber voltar para o inglês tira o medo de trocar o
+idioma do sistema; babel é a fonte padrão de CLDR em Python, por isso entra como dependência.
+
+**D-19. Deck Slang (RF-11).**
+Sentidos do CC-CEDICT marcados como (slang) / (Internet slang) / neologism, sem os de Taiwan e cantonês, ranqueados
+pelo wordfreq; uma palavra comum com sentido de gíria raro perde 2 pontos Zipf e mostra os dois significados. Idioms =
+entradas (idiom) de 4 caracteres do CC-CEDICT, top 300 por frequência. 歇后语 são curados (o CC-CEDICT não tem
+nenhum). Cerca de 730 cards.
+**Por quê:** reaproveita fontes já usadas, com marcação explícita; a penalidade evita ensinar o sentido de gíria antes
+do sentido comum.
+
+**D-20. Estudo em paralelo (decisão do usuário).**
+Deck pai `中文` com 15 novos/dia e gather order Deck; limites dos subdecks: Survival 8, Software 4, Slang 3. Caracteres
+só ganham cards próprios no Survival; Software e Slang mostram no verso a decomposição por caractere. Assim, peças antes
+do todo (CA-03) vale só dentro do Survival.
+**Por quê:** o usuário quer avançar nas três frentes ao mesmo tempo. Aceito porque a maioria dos caracteres desses
+decks é frequente e o Survival os ensina cedo, e o dicionário de peças do Yomitan cobre o resto.
+
+**D-21. Ajustes da implementação.**
+As medidas reais do build substituem as estimativas iniciais nas decisões acima: cerca de 80 seeds, 30 cards de frase
+(só seeds com mais de uma palavra), limite de 6 palavras, palavras de um caractere viram notas de caractere.
+**Por quê:** a lista de seeds do protótipo (`specs/prototypes/brave-strings/pak.py`) foi recortada e as regras de
+descarte passaram a valer também para o tier 1; os números foram recalculados no build real (T-07).
+
 ## Modelo de dados
 
 Um tipo de nota por tipo de conteúdo, todos com ID de modelo fixo. O CSS reaproveita a classe `.pequeno` do deck de
